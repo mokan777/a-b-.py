@@ -54,3 +54,43 @@ for i in range(len(numbers) - 1):
 print(f"Отсортированный список (выбор): {numbers}")
 print(f"Количество сравнений (выбор): {сравнения_выбора}")
 
+
+
+
+
+
+
+import random
+
+# Генерация отсортированного списка из 100 случайных целых чисел без дубликатов
+numbers = sorted(random.sample(range(1_000_000), 100))
+
+# Запрашиваем у пользователя число для поиска
+target = int(input("Введите число для поиска: "))
+
+# Линейный поиск
+сравнения_linear = 0
+for i, el in enumerate(numbers):
+    сравнения_linear += 1
+    if el == target:
+        print(f"Элемент найден по линейному поиску на позиции {i} за {сравнения_linear} сравнений.")
+        break
+else:
+    print(f"Элемент {target} не найден линейным поиском.")
+
+# Бинарный поиск
+сравнения_binary = 0
+left = 0
+right = len(numbers) - 1
+while left <= right:
+    сравнения_binary += 1
+    mid = (left + right) // 2
+    if numbers[mid] == target:
+        print(f"Элемент найден по бинарному поиску на позиции {mid} за {сравнения_binary} сравнений.")
+        break
+    elif numbers[mid] < target:
+        left = mid + 1
+    else:
+        right = mid - 1
+else:
+    print(f"Элемент {target} не найден бинарным поиском.")
